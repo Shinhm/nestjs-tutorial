@@ -6,8 +6,4 @@ Accept: application/json
 POST {{host}}/cats
 Content-Type: application/json
 
-{
-  "test": "hello world"
-}
-
 ### 테스트트세트트

@@ -7,27 +7,25 @@ import {
   Post,
   Query,
   Redirect,
-  Req,
   Res,
 } from '@nestjs/common';
-import { Request, Response } from 'express';
-import { CreateCatDTO } from './cats.dto';
+import { CreateCatDTO } from './dto/cats.dto';
+import { CatsService } from './cats.service';
+import { ICat } from './interface/cats.interface';
 
 @Controller({ path: 'cats', host: ':sub.devel.kakao.com' })
 export class CatsController {
+  constructor(private catsService: CatsService) {}
+
   @Get()
   @HttpCode(201)
-  findAll(
-    @Req() request: Request,
-    @Res({ passthrough: true }) response: Response,
-  ) {
-    response.send(request.headers);
+  async findAll(): Promise<ICat[]> {
+    return this.catsService.findAll();
   }
 
   @Get('redirect')
   @Redirect('/users')
   redirectTest(@Query('version') version) {
-    console.log(version);
     if (version === 'cats') {
       return { url: '/cats' };
     }
@@ -40,7 +38,7 @@ export class CatsController {
   }
 
   @Post()
-  async create(@Body() cats: CreateCatDTO) {
-    return 'make cats';
+  async create(@Body() cat: CreateCatDTO) {
+    this.catsService.create({ age: 10, name: 'hello' });
   }
 }
