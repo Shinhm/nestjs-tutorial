@@ -1,0 +1,13 @@
+GET {{host}}/cats
+Accept: application/json
+
+### 전체 cat 데이터 가져오기
+
+POST {{host}}/cats
+Content-Type: application/json
+
+{
+  "test": "hello world"
+}
+
+### 테스트트세트트
