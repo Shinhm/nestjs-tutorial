@@ -1,0 +1,9 @@
+GET {{host}}/dogs
+Accept: application/json
+
+### 전체 cat 데이터 가져오기
+
+POST {{host}}/dogs
+Content-Type: application/json
+
+### 테스트트세트트
